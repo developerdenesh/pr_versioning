@@ -1,5 +1,5 @@
 ---
-name: Say hello
+name: A pull request (PR) based Github Action workflow to update Tags whenever a PR is merged
 description: An action to say hello
 inputs:
   workspace:
