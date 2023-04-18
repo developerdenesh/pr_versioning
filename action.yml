@@ -13,3 +13,4 @@ runs:
   main: index.js
 branding:
   color: 'blue'
+  icon: 'book-open'
