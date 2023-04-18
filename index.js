@@ -65,15 +65,15 @@ const run = async () => {
         // =========================================================================
         // Update the semantic version according to the Pull Request Title
         // =========================================================================
-        if (argument == "feature" || argument == "feat") {
-            console.log("This is a feature")
+        if (argument === "breaking" || argument === "break") {
+            console.log("This is a breaking change")
             major += 1
-        } else if (argument == "fix") {
+        } else if (argument === "feature" || argument === "feat") {
             console.log("This is a fix")
             minor += 1
         }
-        else if (argument == "patch") {
-            console.log("This is a patch")
+        else if (argument === "fix") {
+            console.log("This is a fix")
             patch += 1
         } else {
             console.log("Unknown prefix for PR: argument")
