@@ -6,7 +6,7 @@ const run = async () => {
         const workspace = core.getInput('workspace');
         const title = core.getInput('title');
         await exec.exec(`echo the name of the workspace is ${workspace}`);
-        await exec.exec(`cd ${workspace}`);
+        await exec.exec(`ls`);
         console.log("A tag will be added to the following commit")
         await exec.exec("git log -n1");
         const { stdout } = await exec.exec("git describe --tags --abbrev=0");
