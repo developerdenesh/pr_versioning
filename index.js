@@ -9,8 +9,6 @@ const run = async () => {
         await exec.exec(`ls`);
         console.log("A tag will be added to the following commit")
         await exec.exec("git log -n1");
-        const stdout = await exec.exec("git describe --tags --abbrev=0");
-
         let output = '';
         let error = '';
 
@@ -25,10 +23,9 @@ const run = async () => {
             }
         };
 
-
         await exec.exec('git', ['describe', '--tags', '--abbrev=0'], options);
-        console.log(output);
-        console.log(error);
+        console.log(`The output is: ${output}`);
+        console.log(`The error is: ${error}`);
 
         // ========================================================================
         // If there is an improper tag create a new tag from scratch
@@ -47,13 +44,13 @@ const run = async () => {
         // There is a strict assumption that all versions will be in the form v0.0.0
         // =========================================================================
         //Take the first part v0 and remove the v to just obtain the number
-        let major = version[0].slice(1)
+        let major = parseInt(version[0].slice(1))
 
         // Take the second part
-        let minor = version[1]
+        let minor = parseInt(version[1])
 
         // Take the third part
-        let patch = version[2]
+        let patch = parseInt(version[2])
 
         // ========================================================================
         // If there is an improper tag create a new tag from scratch
