@@ -19,7 +19,7 @@ const run = async () => {
             console.log("--> v0.0.0")
             return
         }
-        
+
         const argument = title.split(":")[0].toLowerCase()
         const version = stdout.split(".")
 
@@ -38,7 +38,7 @@ const run = async () => {
         // ========================================================================
         // If there is an improper tag create a new tag from scratch
         // ========================================================================
-        if ( !major || !minor || !patch ) {
+        if (!major || !minor || !patch) {
             console.log("Previous tag was does not follow the format: v0.0.0. Creating a new tag")
             console.log("--> v0.0.0")
             return
@@ -54,20 +54,21 @@ const run = async () => {
             console.log("This is a fix")
             minor += 1
         }
-        else if(argument == "patch") {
+        else if (argument == "patch") {
             console.log("This is a patch")
             patch += 1
         } else {
             console.log("Unknown prefix for PR: argument")
             return
         }
+        
         await exec.exec(`git tag v${major}.${minor}.${patch}`);
         await exec.exec(`git push origin --tags`);
         console.log("A tag will be added to the following commit")
 
     } catch (error) {
-    core.setFailed(error.message);
-}
+        core.setFailed(error.message);
+    }
 }
 
 run();

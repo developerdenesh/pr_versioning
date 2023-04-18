@@ -2,8 +2,11 @@
 name: Say hello
 description: An action to say hello
 inputs:
-  name:
-    description: 'Name of person to say hello to'
+  workspace:
+    description: 'Github workspace'
+    required: true
+  title:
+    description: 'Title of the Pull Request'
     required: true
 runs:
   using: node12
