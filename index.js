@@ -5,7 +5,7 @@ const run = async () => {
     try {
         const workspace = core.getInput('workspace');
         const title = core.getInput('title');
-
+        await exec.exec(`echo the name of the workspace is ${workspace}`);
         await exec.exec(`cd ${workspace}`);
         console.log("A tag will be added to the following commit")
         await exec.exec("git log -n1");
@@ -61,7 +61,7 @@ const run = async () => {
             console.log("Unknown prefix for PR: argument")
             return
         }
-        
+
         await exec.exec(`git tag v${major}.${minor}.${patch}`);
         await exec.exec(`git push origin --tags`);
         console.log("A tag will be added to the following commit")
