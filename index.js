@@ -9,7 +9,7 @@ const run = async () => {
         await exec.exec(`ls`);
         console.log("A tag will be added to the following commit")
         await exec.exec("git log -n1");
-        const { stdout } = await exec.exec("git describe --tags --abbrev=0");
+        const stdout = await exec.exec("git describe --tags --abbrev=0");
 
         console.log(stdout)
 
