@@ -11,19 +11,37 @@ const run = async () => {
         await exec.exec("git log -n1");
         const stdout = await exec.exec("git describe --tags --abbrev=0");
 
-        console.log(stdout)
+        let output = '';
+        let error = '';
+
+        const options = {
+            listeners: {
+                stdout: (data) => {
+                    output += data.toString();
+                },
+                stderr: (data) => {
+                    error += data.toString();
+                }
+            }
+        };
+
+
+        await exec.exec('git', ['describe', '--tags', '--abbrev=0'], options);
+        console.log(output);
+        console.log(error);
 
         // ========================================================================
         // If there is an improper tag create a new tag from scratch
         // ========================================================================
-        if (!stdout) {
+        if (!output) {
             console.log("No previous tag found. Creating a new tag")
-            console.log("--> v0.0.0")
+            await exec.exec(`git tag v0.0.1`);
+            await exec.exec(`git push origin --tags`);
             return
         }
 
         const argument = title.split(":")[0].toLowerCase()
-        const version = stdout.split(".")
+        const version = output.split(".")
 
         // =========================================================================
         // There is a strict assumption that all versions will be in the form v0.0.0
@@ -42,7 +60,8 @@ const run = async () => {
         // ========================================================================
         if (!major || !minor || !patch) {
             console.log("Previous tag was does not follow the format: v0.0.0. Creating a new tag")
-            console.log("--> v0.0.0")
+            await exec.exec(`git tag v0.0.1`);
+            await exec.exec(`git push origin --tags`);
             return
         }
 
