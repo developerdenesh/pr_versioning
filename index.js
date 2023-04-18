@@ -11,6 +11,8 @@ const run = async () => {
         await exec.exec("git log -n1");
         const { stdout } = await exec.exec("git describe --tags --abbrev=0");
 
+        console.log(stdout)
+
         // ========================================================================
         // If there is an improper tag create a new tag from scratch
         // ========================================================================
