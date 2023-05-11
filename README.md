@@ -32,5 +32,8 @@ jobs:
                 title: ${{ github.event.pull_request.title }}
 ```
 
+## Common Errors
+1. If the following error is seen - fatal: unable to access 'https://github.com/someuser/somerepo': The requested URL returned error: 403. Make sure the settings to allow actions to make changes to a repository is set appropriately as seen here: ![Error Image One](images/Error_1.png)
+
 ## Resources: 
 The concept has arisen from [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/). This will work best when used together with [semantic-pull-request](https://github.com/amannn/action-semantic-pull-request/tree/v5/)
