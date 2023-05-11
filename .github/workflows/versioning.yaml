@@ -1,10 +1,3 @@
-# PR_VERSIONING
-A github action to to automatically create tags linked to Pull Requests based upon the pull request title
-
-## Example:
-The action can be run as follows: 
-
-```yaml
 name: Versioning
 
 on:
@@ -30,7 +23,3 @@ jobs:
             with:
                 workspace: ${{ github.workspace }}
                 title: ${{ github.event.pull_request.title }}
-```
-
-## Resources: 
-The concept has arisen from [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/). This will work best when used together with [semantic-pull-request](https://github.com/amannn/action-semantic-pull-request/tree/v5/)
