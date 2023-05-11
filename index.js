@@ -71,9 +71,9 @@ const run = async () => {
             return
         }
 
-        const major = parseInt(major_str)
-        const minor = parseInt(minor_str)
-        const patch = parseInt(patch_str)
+        let major = parseInt(major_str)
+        let minor = parseInt(minor_str)
+        let patch = parseInt(patch_str)
 
         if (isNaN(major) || isNaN(minor) || isNaN(patch)) {
             console.log("Not a number. Previous tag was does not follow the format: v0.0.0. Creating a new tag")
