@@ -11,6 +11,10 @@ const run = async () => {
 
         await exec.exec(`echo the name of the workspace is ${workspace}`);
         await exec.exec(`ls`);
+
+        // Adding credentials 
+        await exec.exec(`git config --global user.email "runner@runner.com"`);
+        await exec.exec(`git config --global user.name "runner_bot"`);
         
         console.log("A tag will be added to the following commit")
         await exec.exec("git log -n1");

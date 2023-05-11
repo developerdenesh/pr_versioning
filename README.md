@@ -25,11 +25,6 @@ jobs:
             with:
                 ref: main
                 fetch-depth: '0'
-            
-          - name: Adding credentials 
-            run: |
-                git config --global user.email "runner@runner.com"
-                git config --global user.name "runner_bot"
           - name: Creating a tag
             uses: developerdenesh/pr_versioning@main
             with:
