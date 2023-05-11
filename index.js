@@ -53,19 +53,30 @@ const run = async () => {
         // There is a strict assumption that all versions will be in the form v0.0.0
         // =========================================================================
         //Take the first part v0 and remove the v to just obtain the number
-        let major = parseInt(version[0].slice(1))
+        let major_str = version[0].slice(1)
 
         // Take the second part
-        let minor = parseInt(version[1])
+        let minor_str = version[1]
 
         // Take the third part
-        let patch = parseInt(version[2])
+        let patch_str = version[2]
 
         // ========================================================================
         // If there is an improper tag create a new tag from scratch
         // ========================================================================
-        if (!major || !minor || !patch) {
-            console.log("Previous tag was does not follow the format: v0.0.0. Creating a new tag")
+        if (!major_str || !minor_str || !patch_str) {
+            console.log("Empty string found. Previous tag was does not follow the format: v0.0.0. Creating a new tag")
+            await exec.exec(`git tag v0.0.1`);
+            await exec.exec(`git push origin --tags`);
+            return
+        }
+
+        const major = parseInt(major_str)
+        const minor = parseInt(minor_str)
+        const patch = parseInt(patch_str)
+
+        if (isNaN(major) || isNaN(minor) || isNaN(patch)) {
+            console.log("Not a number. Previous tag was does not follow the format: v0.0.0. Creating a new tag")
             await exec.exec(`git tag v0.0.1`);
             await exec.exec(`git push origin --tags`);
             return
