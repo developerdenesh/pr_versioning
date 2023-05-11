@@ -2,11 +2,16 @@ const core = require('@actions/core')
 const exec = require('@actions/exec')
 
 const run = async () => {
+    const minor_arguments = ["feat", "feature"]
+    const patch_arguments = ["fix", "patch", "chore", "docs", "style", "refactor", "ref", "perf", "test", "build", "ci", "revert"]
+
     try {
         const workspace = core.getInput('workspace');
         const title = core.getInput('title');
+
         await exec.exec(`echo the name of the workspace is ${workspace}`);
         await exec.exec(`ls`);
+        
         console.log("A tag will be added to the following commit")
         await exec.exec("git log -n1");
         let output = '';
@@ -68,12 +73,12 @@ const run = async () => {
         if (argument === "breaking" || argument === "break") {
             console.log("This is a breaking change")
             major += 1
-        } else if (argument === "feature" || argument === "feat") {
-            console.log("This is a fix")
+        } else if (minor_arguments.includes(argument)) {
+            console.log("This is a minor change")
             minor += 1
         }
-        else if (argument === "fix") {
-            console.log("This is a fix")
+        else if (patch_arguments.includes(argument)) {
+            console.log("This is a patched change")
             patch += 1
         } else {
             console.log("Unknown prefix for PR: argument")
