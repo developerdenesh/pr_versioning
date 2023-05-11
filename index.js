@@ -88,6 +88,8 @@ const run = async () => {
         if (argument === "breaking" || argument === "break") {
             console.log("This is a breaking change")
             major += 1
+            minor = 0
+            patch = 0
         } else if (minor_arguments.includes(argument)) {
             console.log("This is a minor change")
             minor += 1
