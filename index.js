@@ -32,7 +32,13 @@ const run = async () => {
             }
         };
 
-        await exec.exec('git', ['describe', '--tags', '--abbrev=0'], options);
+        
+        try {
+            await exec.exec('git', ['describe', '--tags', '--abbrev=0'], options);
+        } catch (error) {
+            console.log("No previous tag found. Let's create the inaugural tag!")
+        }
+        
         console.log(`The output is: ${output}`);
         console.log(`The error is: ${error}`);
 
